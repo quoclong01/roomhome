@@ -1,0 +1,340 @@
+:root {
+  --primary-font: "Spartan", sans-serif;
+  --gray-dark: hsl(0, 0%, 63%);
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+  --gray-darker: hsl(0, 0%, 27%);
+  --text-size: 12px;
+  --height-slide: 534px;
+  --height-desktop: 800px;
+  --height-mobile: 360px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--primary-font);
+  font-size: var(--text-size);
+  color: var(--gray-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+}
+
+.main {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: var(--height-desktop);
+  display: flex;
+  flex-direction: column;
+}
+
+.slider-container {
+  width: 100%;
+  position: relative;
+  height: var(--height-slide);
+}
+
+.slide {
+  position: relative;
+  height: inherit;
+  display: none;
+}
+
+.slide.active {
+  display: flex;
+  animation: animate1 0.5s linear;
+}
+
+.slide-image {
+  width: 58.33%;
+}
+
+.slide1 .slide-image {
+  background: url(../images/desktop-image-hero-1.jpg) no-repeat center/cover;
+}
+.slide2 .slide-image {
+  background: url(../images/desktop-image-hero-2.jpg) no-repeat center/cover;
+}
+.slide3 .slide-image {
+  background: url(../images/desktop-image-hero-3.jpg) no-repeat center/cover;
+}
+
+.slide-content {
+  width: 41.67%;
+  padding: 110px 100px 150px;
+}
+
+.slide-heading {
+  letter-spacing: -2px;
+  font-size: 40px;
+  color: var(--black);
+  margin-bottom: 30px;
+  line-height: normal;
+}
+
+.slide-desc {
+  margin-bottom: 30px;
+}
+
+.slide-link {
+  font-size: 14px;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 10px;
+}
+
+.slide-icon {
+  margin-left: 20px;
+}
+
+.slide-link:hover,
+.slide-link:hover .slide-icon {
+  color: var(--gray-dark);
+}
+
+.slide-control {
+  position: absolute;
+  bottom: 0;
+  right: calc(30% + 8px);
+  display: flex;
+}
+
+.btn {
+  width: 80px;
+  height: 80px;
+  background-color: var(--black);
+  transition: all 0.2s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-toggle {
+  background-color: transparent;
+  display: none;
+}
+
+.btn:hover {
+  background-color: var(--gray-darker);
+}
+
+.nav {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  display: inline-flex;
+  margin-right: 50px;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 0 25px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--white);
+  text-transform: lowercase;
+  display: inline-block;
+  padding: 10px 0;
+  position: relative;
+}
+
+.nav-link:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 0px;
+  background-color: var(--white);
+  transition: width 0.2s linear;
+}
+
+.nav-item:hover .nav-link:before {
+  width: 20px;
+}
+
+.about {
+  height: calc(var(--height-desktop) - var(--height-slide));
+  display: flex;
+}
+
+.about-content {
+  padding: 70px 50px;
+}
+
+.about-heading {
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: var(--black);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.about-image {
+  width: 30%;
+}
+
+.about-content {
+  width: 40%;
+}
+
+.about-image img {
+  width: 100%;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes animate1 {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 767px) {
+  .main {
+    align-items: center;
+    max-width: 100%;
+    height: auto;
+  }
+  .main.main-active:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
+  .main-active .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--white);
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    animation: animate 0.5s ease-in-out;
+  }
+  .main-active .nav-link {
+    color: var(--black);
+  }
+  .main-active .nav-item:hover .nav-link:before {
+    background-color: var(--black);
+  }
+  .slider-container {
+    height: auto;
+    width: 100%;
+  }
+  .slide.active {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+  .slide-content {
+    padding: 60px 30px;
+    width: 100%;
+  }
+  .slide-image {
+    height: var(--height-mobile);
+    width: 100%;
+  }
+  .slide1 .slide-image {
+    background: url(../images/mobile-image-hero-1.jpg) no-repeat center/cover;
+  }
+  .slide2 .slide-image {
+    background: url(../images/mobile-image-hero-2.jpg) no-repeat center/cover;
+  }
+  .slide3 .slide-image {
+    background: url(../images/mobile-image-hero-3.jpg) no-repeat center/cover;
+  }
+  .slide-heading {
+    font-size: 30px;
+  }
+  .slide-control {
+    right: 0;
+  }
+  .btn {
+    width: 55px;
+    height: 55px;
+  }
+  .btn-toggle {
+    display: block;
+  }
+  .nav {
+    width: 90%;
+    top: 5%;
+    left: 20px;
+  }
+  .nav-logo {
+    margin-left: 40%;
+    margin-right: 0;
+    transform: translateX(-40%);
+  }
+  .nav-menu {
+    display: none;
+  }
+  .about {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .about-image {
+    width: 100%;
+  }
+  .about-content {
+    width: 100%;
+    padding: 50px 20px;
+  }
+}
